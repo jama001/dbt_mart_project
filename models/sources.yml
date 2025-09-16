@@ -1,0 +1,48 @@
+version: 2
+
+sources: 
+  - name: raw
+    description: "![Diagram](assets/relationship_diagram.png)"
+    database: DBT_MART
+    schema: dbo
+    tables: 
+      - name: customers
+        description: "Customer Information and Location"
+        identifier: customers_raw
+        columns:
+          - name: customer_id
+            data_tests:
+              - unique
+              - not_null
+            description: "Unique customer identifier for each order (primary key)"
+          - name: customer_unique_id
+            description: "Unique identifier of a customer"
+      - name: orders
+        identifier: orders_raw
+        description: "Order Information"
+        columns:
+          - name: order_id
+            data_tests:
+              - unique
+              - not_null
+            description: "Unique identifier for each order (primary key)"
+          - name: order_status
+            data_tests:
+              - accepted_values:
+                  values: ['delivered', 'shipped', 'canceled', 'unavailable','invoiced','processing','created','approved']
+      - name: order_items
+        identifier: order_items_raw
+        description: "Data about the items purchased within each order"
+        columns:
+          - name: order_id
+            data_tests:
+              - not_null
+      - name: products
+        identifier: products_raw
+        description: "This dataset includes data about the products sold by Olist"
+        columns:
+          - name: product_id
+            data_tests:
+              - unique
+              - not_null
+        
