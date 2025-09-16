@@ -1,4 +1,16 @@
-
+# dbt build artifacts
 target/
 dbt_packages/
 logs/
+
+# Python virtual environments
+.venv/
+venv/
+dbt_venv/
+
+# VS Code settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
